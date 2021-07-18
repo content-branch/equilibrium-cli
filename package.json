@@ -1,0 +1,23 @@
+{
+  "name": "equilibrium-cli",
+  "version": "1.0.0",
+  "description": "command line tools for equilibrium",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/content-branch/equilibrium-cli.git"
+  },
+  "author": "Fanantenana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/content-branch/equilibrium-cli/issues"
+  },
+  "homepage": "https://github.com/content-branch/equilibrium-cli#readme",
+  "dependencies": {
+    "@caporal/core": "^2.0.2",
+    "consola": "^2.15.3"
+  }
+}
