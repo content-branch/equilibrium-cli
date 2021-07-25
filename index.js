@@ -1,8 +1,37 @@
 #!/usr/bin/env ts-node
-// file: pizza-hit.ts
-const {program} = require("@caporal/core")
 
-program
+const { program } = require('@caporal/core')
+const { spawn, exec } = require('child_process');
+const consola = require('consola');
+const { stdout, stderr } = require('process');
+const commandMapping = require('./ command-mapping.json');
+
+function initializeCommands()
+{
+
+    Object.entries(commandMapping).forEach(command=>{
+        program
+            .command(command[0])
+            .action(({logger, args, options })=>{
+                exec(command[1], (error, stdout, stderr) => {
+                    if (error) {
+                        consola.error(`error: ${error.message}`);
+                        return;
+                    }
+                    if (stderr) {
+                        consola.error(`stderr: ${stderr}`);
+                        return;
+                    }
+                    consola.success(`success: ${stdout}`);
+                });
+            });
+    });
+    program.run();
+}
+
+initializeCommands();
+
+/*program
   // First possible command: "order"
   .command("order", "Order a pizza")
   .argument("<type>", "Type of pizza")
@@ -21,12 +50,9 @@ program
     logger.info("Order canceled: %s", args.orderId)
   })
 
-program.run()
+program.run();*/
 
-const { spawn, exec } = require("child_process");
-const consola = require('consola');
-
-exec('git clone', (error, stdout, stderr) => {
+/*exec('git status', (error, stdout, stderr) => {
     if (error) {
         consola.error(`error: ${error.message}`);
         return;
@@ -36,7 +62,7 @@ exec('git clone', (error, stdout, stderr) => {
         return;
     }
     consola.success(`stdout: ${stdout}`);
-});
+});*/
 
 //const ls = spawn("ls", ["-la"]);
 // const ls = spawn('git clone');
